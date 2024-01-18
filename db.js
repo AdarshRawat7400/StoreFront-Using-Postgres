@@ -9,7 +9,7 @@ import { Sequelize,DataTypes } from "sequelize";
 //     freezeTableName: true
 //   }/* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
 // });
-const connectionString = 'postgres://storefront_ywej_user:82H9x96bpDpzuFG3zwmqwH8ThH89O90n@dpg-cmkb3hn109ks739kobfg-a.oregon-postgres.render.com/storefront_ywej';
+const connectionString = process.env.DATABASE_URI.toString();
 
 // Parse the connection string
 const sequelize = new Sequelize(connectionString, {
