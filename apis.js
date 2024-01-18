@@ -38,7 +38,9 @@ router.post('/login', async (request, response) => {
 
   router.get('/logout', isAuthenticated, async (request, response) => {
     try {
-        // client with remove token once status true returned 
+            // Assuming you're using JWT and storing the token in a cookie
+        response.clearCookie('jwtToken');
+
         return response.status(200).json({"status":true,"message":" User Logout  Successfully"})
     }
     catch (error) {
