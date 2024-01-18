@@ -10,30 +10,35 @@ const router = express.Router();
 
 router.post('/login', async (request, response) => {
     try {
+      const username = request.body.username;
+      const plainPassword = request.body.password;
+  
+      const user = await db.users.findOne({ where: { username } });
+  
+      if (!user) {
+        return response.status(400).json({ status: false, message: 'User not found or password incorrect' });
+      }
+  
+      const isSamePassword = await comparePassword(plainPassword, user.password);
+  
+      if (!isSamePassword) {
+        return response.status(400).json({ status: false, message: 'User not found or password incorrect' });
+      }
+  
+      // If username and password are valid, generate a JWT token
+      const token = await generateToken(user.id);
 
-        const username = request.body.username
-        const plainPassword = request.body.password;
-        const user = await db.users.findOne({where: {username:username}})
-        const is_same_password = await comparePassword(plainPassword, user.password);
-        if (user && is_same_password) {
-            console.log("user",user)
-            const token = await generateToken(user.id);
-            request.session.token = token;
-            return response.status(200).json({"status":true,"message":" Users Logged in Successfully"})
-        } else {
-            return response.status(400).json({"status":false,"message":" User not Found or password Incorrect"})
-        }
+  
+      // Send the token in the response
+      return response.status(200).json({ status: true, message: 'User logged in successfully', token });
+    } catch (error) {
+      return response.status(500).json({ status: false, message: error.message });
     }
-    catch (error) {
-        // Handle the exception
-        return response.status(404).json({"status":false, "message": error.message });
-    }
-});
-router.get('/logout', isAuthenticated, async (request, response) => {
+  });
+
+  router.get('/logout', isAuthenticated, async (request, response) => {
     try {
-        // Clear the token from the session
-        request.session.token = null;
-
+        // client with remove token once status true returned 
         return response.status(200).json({"status":true,"message":" User Logout  Successfully"})
     }
     catch (error) {

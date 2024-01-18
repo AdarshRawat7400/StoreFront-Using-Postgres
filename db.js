@@ -1,18 +1,7 @@
 import { Sequelize,DataTypes } from "sequelize";
+import config from  './config.js'
 
-
-// Option 3: Passing parameters separately (other dialects)
-// const sequelize = new Sequelize('storefrontDB', 'postgres', 'postgres', {
-//   host: 'localhost',
-//   dialect: 'postgres',
-//   define: {
-//     freezeTableName: true
-//   }/* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
-// });
-const connectionString = process.env.DATABASE_URI.toString();
-
-// Parse the connection string
-const sequelize = new Sequelize(connectionString, {
+const sequelize = new Sequelize(config.DATABASE_URI, {
   dialect: 'postgres',
   define: {
     freezeTableName: true
@@ -65,7 +54,7 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: "user"
-  }
+  },
 }, {
   // Other model options go here
 });
