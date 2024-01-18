@@ -2,13 +2,29 @@ import { Sequelize,DataTypes } from "sequelize";
 
 
 // Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize('storefrontDB', 'postgres', 'postgres', {
-  host: 'localhost',
+// const sequelize = new Sequelize('storefrontDB', 'postgres', 'postgres', {
+//   host: 'localhost',
+//   dialect: 'postgres',
+//   define: {
+//     freezeTableName: true
+//   }/* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+// });
+const connectionString = 'postgres://storefront_ywej_user:82H9x96bpDpzuFG3zwmqwH8ThH89O90n@dpg-cmkb3hn109ks739kobfg-a.oregon-postgres.render.com/storefront_ywej';
+
+// Parse the connection string
+const sequelize = new Sequelize(connectionString, {
   dialect: 'postgres',
   define: {
     freezeTableName: true
-  }/* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Disable SSL verification (not recommended for production)
+    }
+  }
 });
+
 
 try {
     await sequelize.authenticate();
