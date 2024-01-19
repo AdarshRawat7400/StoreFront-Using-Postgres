@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import db from './models.mjs'
 import { randomInt } from 'crypto';
+import os from 'os';
 
 
 // Hash a password for storage
@@ -34,4 +35,20 @@ const generateProductUniqueItemId = async () => {
   return uniqueId;
 };
 
-export {hashPassword,comparePassword,generateItemUniqueItemId,generateProductUniqueItemId};
+
+const getServerIP = () => {
+  const ifaces = os.networkInterfaces();
+  let serverIP = 'localhost'; // Default to localhost if no IP is found
+
+  Object.keys(ifaces).forEach((ifname) => {
+    ifaces[ifname].forEach((iface) => {
+      if ('IPv4' === iface.family && !iface.internal) {
+        serverIP = iface.address;
+      }
+    });
+  });
+
+  return serverIP;
+};
+
+export {hashPassword,comparePassword,generateItemUniqueItemId,generateProductUniqueItemId,getServerIP};

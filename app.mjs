@@ -7,10 +7,16 @@ import { RequestLoggerMiddleware } from "./middleware.mjs"
 import session from 'express-session';
 import passport from "passport";
 import config from "./config/config.mjs";
+import cors from 'cors'; // Import the cors middleware
+import {getServerIP} from "./utils.mjs";
+
+
+
 
 
 const PORT = config.PORT || 3000;
 const app = express()
+app.use(cors()); // Enable CORS
 app.use(passport.initialize());
 app.use(express.json());
 app.use(cookieParser());
@@ -26,16 +32,10 @@ app.use(RequestLoggerMiddleware)
 
 
 app.use('/store',router)
-// Serve Swagger UI documentation
-const swaggerConfig = {
-  info: {
-    title: 'StoreFront',
-    description: 'API documentation [StoreFront]',
-    version: '1.0.0', // Specify your API version
-  },
-  // Other configuration options go here
-};
+
 const swaggerDocument = JSON.parse(readFileSync('./swagger-output.json', 'utf-8'));
+swaggerDocument.host = `${getServerIP()}:${PORT}` // Replace 'your-port' with the actual port number
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 

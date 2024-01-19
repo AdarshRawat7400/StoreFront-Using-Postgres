@@ -5,8 +5,8 @@
     "description": "API documentation [StoreFront]",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
+  "host": "localhost:5000",
+  "basePath": "/store",
   "schemes": [
     "http"
   ],
