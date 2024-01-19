@@ -1,6 +1,6 @@
-import db from "./db.js";
+import db from "./models.mjs";
 import jwt from 'jsonwebtoken';
-import config  from "./config.js";
+import config  from "./config/config.mjs";
 // authMiddleware.js
 import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';

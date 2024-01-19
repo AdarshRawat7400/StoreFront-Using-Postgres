@@ -1,10 +1,10 @@
 import express from "express"
 import cookieParser from 'cookie-parser';
-import router from  './apis.js'
-import { RequestLoggerMiddleware } from "./middleware.js"
+import router from  './apis.mjs'
+import { RequestLoggerMiddleware } from "./middleware.mjs"
 import session from 'express-session';
 import passport from "passport";
-import config from "./config.js";
+import config from "./config/config.mjs";
 
 
 const PORT = config.PORT || 3000;

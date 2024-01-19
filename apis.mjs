@@ -1,8 +1,7 @@
 import express from 'express'
-import { hashPassword, comparePassword,generateItemUniqueItemId,generateProductUniqueItemId  } from './utils.js';
-import db from "./db.js";
-import { isAuthenticated, generateToken} from './authentication.js';
-import { UUID, where } from 'sequelize';
+import { hashPassword, comparePassword,generateItemUniqueItemId,generateProductUniqueItemId  } from './utils.mjs';
+import db from "./models.mjs";
+import { isAuthenticated, generateToken} from './authentication.mjs';
 
 
 const router = express.Router();
