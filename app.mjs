@@ -1,5 +1,7 @@
 import express from "express"
 import cookieParser from 'cookie-parser';
+import swaggerUi from 'swagger-ui-express';
+import { readFileSync } from 'fs';
 import router from  './apis.mjs'
 import { RequestLoggerMiddleware } from "./middleware.mjs"
 import session from 'express-session';
@@ -20,9 +22,22 @@ app.use(session({
     cookie: { secure: false } // Adjust this based on your deployment environment
   }));
 
-
 app.use(RequestLoggerMiddleware)
+
+
 app.use('/store',router)
+// Serve Swagger UI documentation
+const swaggerConfig = {
+  info: {
+    title: 'StoreFront',
+    description: 'API documentation [StoreFront]',
+    version: '1.0.0', // Specify your API version
+  },
+  // Other configuration options go here
+};
+const swaggerDocument = JSON.parse(readFileSync('./swagger-output.json', 'utf-8'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.listen(PORT, ()=> {
     console.log(`Server is started Running on Port : ${PORT}`);

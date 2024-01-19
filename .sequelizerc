@@ -1,5 +1,4 @@
 const path = require('path');
-require("babel-register");
 
 module.exports = {
   'config': path.resolve('config', 'db_config.mjs'),
