@@ -7,12 +7,6 @@
   },
   "host": "localhost:5000",
   "basePath": "/store",
-  "tags": [
-    {
-      "name": "StoreFront APIs",
-      "description": "Custom default tag description"
-    }
-  ],
   "schemes": [
     "http"
   ],

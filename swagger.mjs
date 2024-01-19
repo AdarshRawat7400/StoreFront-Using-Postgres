@@ -8,14 +8,9 @@ const swaggerConfig = {
   info: {
     title: 'StoreFront',
     description: 'API documentation [StoreFront]',
-    version: '1.0.0', // Specify your API version
+    version: '1.0.0', // Specify your API version,
   },
-  tags: [
-    {
-      name: 'StoreFront APIs',
-      description: 'Custom default tag description',
-    }
-    ,],
+  
   host:  'localhost:5000', // Replace 'your-server-ip' with the actual IP address or hostname
   basePath: '/store',
   schemes: ['http'],
