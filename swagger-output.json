@@ -8,7 +8,7 @@
   "host": "localhost:5000",
   "basePath": "/store",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/login": {

@@ -30,6 +30,7 @@ app.use('/store',router)
 
 const swaggerDocument = JSON.parse(readFileSync('./swagger-output.json', 'utf-8'));
 swaggerDocument.host = config.LOCAL_ENV ? 'localhost:5000' : config.API_ENDPOINT
+swaggerDocument.schemes =  config.LOCAL_ENV ? ['http'] : ['https']
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
