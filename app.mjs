@@ -8,11 +8,6 @@ import session from 'express-session';
 import passport from "passport";
 import config from "./config/config.mjs";
 import cors from 'cors'; // Import the cors middleware
-import {getServerIP} from "./utils.mjs";
-
-
-
-
 
 const PORT = config.PORT || 3000;
 const app = express()
@@ -34,8 +29,7 @@ app.use(RequestLoggerMiddleware)
 app.use('/store',router)
 
 const swaggerDocument = JSON.parse(readFileSync('./swagger-output.json', 'utf-8'));
-swaggerDocument.host = `${getServerIP()}:${PORT}` // Replace 'your-port' with the actual port number
-
+swaggerDocument.host = config.LOCAL_ENV ? 'localhost:5000' : config.API_ENDPOINT
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 

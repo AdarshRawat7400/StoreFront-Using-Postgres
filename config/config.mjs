@@ -13,4 +13,6 @@ export default {
     'DB_PASSWORD': process.env.DB_PASSWORD,
     'DB_NAME': process.env.DB_NAME,
     'DB_DIALECT': process.env.DB_DIALECT,
+    'API_ENDPOINT' : process.env.API_ENDPOINT,
+    'LOCAL_ENV' : process.env.LOCAL_ENV,
 }

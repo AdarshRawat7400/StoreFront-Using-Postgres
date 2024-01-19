@@ -1,5 +1,6 @@
 // swagger.js
 
+
 const outputFile = './swagger-output.json';
 const endpointsFiles = ['./apis.mjs']; // Update the path to match your actual routes
 // Serve Swagger UI documentation
@@ -9,7 +10,7 @@ const swaggerConfig = {
     description: 'API documentation [StoreFront]',
     version: '1.0.0', // Specify your API version
   },
-  host: 'localhost:5000', // Replace 'your-server-ip' with the actual IP address or hostname
+  host:  'localhost:5000', // Replace 'your-server-ip' with the actual IP address or hostname
   basePath: '/store',
   schemes: ['http'],
 
